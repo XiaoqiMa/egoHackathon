@@ -24,6 +24,6 @@ Our services should support at least the following functions:
 knitr::include_graphics("img/egoPay.png")
 ```
 
-![](https://media.giphy.com/media/3oEduOtKREwfTH73Q4/giphy.gif)
+<!-- ![](https://media.giphy.com/media/3oEduOtKREwfTH73Q4/giphy.gif) -->
 
 

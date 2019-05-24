@@ -5,7 +5,7 @@
 class GeoMaps:
     
     def __init__(self, curr_location):
-        self.key = 'AIzaSyAT-8WclaMhy1oSPq9m5TxN9p7FJHZcdcw'
+        self.key = 'GoogleAPIKey'
         gmaps.configure(api_key=self.key)
         self.curr_location = curr_location
         self.fig = gmaps.figure(center=self.curr_location, zoom_level=12)

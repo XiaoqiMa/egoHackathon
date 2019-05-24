@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Section 5 Google Map Visulization | e.GO Digital Hackathon</title>
+  <title>Section 4 e.GO Park | e.GO Digital Hackathon</title>
   <meta name="description" content="This is a website demo for hachathon The output format for this example is bookdown::gitbook." />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Section 5 Google Map Visulization | e.GO Digital Hackathon" />
+  <meta property="og:title" content="Section 4 e.GO Park | e.GO Digital Hackathon" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Section 5 Google Map Visulization | e.GO Digital Hackathon" />
+  <meta name="twitter:title" content="Section 4 e.GO Park | e.GO Digital Hackathon" />
   
   <meta name="twitter:description" content="This is a website demo for hachathon The output format for this example is bookdown::gitbook." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="e-go-park.html">
-<link rel="next" href="driving-animation.html">
+<link rel="prev" href="dataset-overview.html">
+<link rel="next" href="google-map-visulization.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -159,55 +159,105 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="google-map-visulization" class="section level1">
-<h1><span class="header-section-number">Section 5</span> Google Map Visulization</h1>
-<p>We could actually use Google Map API to get access to the location, update the location, track the location and guide the direction.</p>
+<div id="e.go-park" class="section level1">
+<h1><span class="header-section-number">Section 4</span> e.GO Park</h1>
+<p>Intelligent, we mean that we should use <em>smart algorithms</em> to choose the most appropriate parking lot, considering the distance, price and etc.</p>
 <ul>
-<li>Code to add marker and direction</li>
+<li>Calculate Geographical distance</li>
 </ul>
-<pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> GeoMaps:
+<pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> geopy.distance <span class="im">import</span> geodesic
+<span class="im">from</span> geopy.geocoders <span class="im">import</span> Nominatim
+
+<span class="kw">class</span> GeoDistance:
     
-    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, curr_location):
-        <span class="va">self</span>.key <span class="op">=</span> <span class="st">&#39;GoogleAPIKey&#39;</span>
-        gmaps.configure(api_key<span class="op">=</span><span class="va">self</span>.key)
-        <span class="va">self</span>.curr_location <span class="op">=</span> curr_location
-        <span class="va">self</span>.fig <span class="op">=</span> gmaps.figure(center<span class="op">=</span><span class="va">self</span>.curr_location, zoom_level<span class="op">=</span><span class="dv">12</span>)
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):
+        <span class="va">self</span>.geolocator <span class="op">=</span> Nominatim(user_agent<span class="op">=</span><span class="st">&quot;demo&quot;</span>)
         
-    <span class="kw">def</span> add_marker(<span class="va">self</span>, marker_pos):
-        markers <span class="op">=</span> gmaps.marker_layer(marker_pos)
-        <span class="va">self</span>.fig.add_layer(markers)
-        <span class="cf">return</span> <span class="va">self</span>.fig
+    <span class="kw">def</span> get_geo_position(<span class="va">self</span>, location):
+        addr <span class="op">=</span> <span class="va">self</span>.geolocator.geocode(location)
+        <span class="cf">return</span> (addr.latitude, addr.longitude)
     
-    <span class="kw">def</span> add_direction(<span class="va">self</span>, origin, destination):
-        to_destination <span class="op">=</span> gmaps.directions_layer(origin, destination)
-        <span class="va">self</span>.fig.add_layer(to_destination)
-        <span class="cf">return</span> <span class="va">self</span>.fig
-    
-    <span class="kw">def</span> get_curr_location(<span class="va">self</span>):
-        <span class="cf">return</span> <span class="va">self</span>.curr_location
-    
-    <span class="kw">def</span> update_location(<span class="va">self</span>, new_location):
-        <span class="va">self</span>.curr_location <span class="op">=</span> new_location</code></pre>
+    <span class="kw">def</span> get_location(<span class="va">self</span>, geo_position):
+        location <span class="op">=</span> <span class="va">self</span>.geolocator.reverse(geo_position)
+        <span class="cf">try</span>:
+            addr <span class="op">=</span> location.raw[<span class="st">&#39;address&#39;</span>]
+            <span class="cf">return</span> <span class="st">&#39;</span><span class="sc">{road}</span><span class="st">, </span><span class="sc">{city_district}</span><span class="st">, </span><span class="sc">{city}</span><span class="st">, </span><span class="sc">{postcode}</span><span class="st">&#39;</span>.<span class="bu">format</span>(<span class="op">**</span>addr)
+        <span class="cf">except</span>:
+            <span class="cf">return</span> location.address
+            
+    <span class="kw">def</span> calc_geo_distance(<span class="va">self</span>, origin, destination):
+        distance <span class="op">=</span> geodesic(origin, destination).km
+        <span class="cf">return</span> distance
+        </code></pre>
 <ul>
-<li>Mark current location</li>
+<li>First get the current location</li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="st">&quot;img/google_marker.png&quot;</span>)</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:marker"></span>
-<img src="img/google_marker.png" alt="google map with marker" width="1070" />
-<p class="caption">
-Figure 5.1: google map with marker
-</p>
-</div>
+<pre class="sourceCode python"><code class="sourceCode python">api_url <span class="op">=</span> <span class="st">&#39;https://ego-vehicle-api.azurewebsites.net/api/v1/vehicle/signals&#39;</span>
+ego_car <span class="op">=</span> EgoCar(api_url)
+curr_loc <span class="op">=</span> ego_car.get_location()
+<span class="bu">print</span>(<span class="st">&#39;current location: &#39;</span>, curr_loc)</code></pre>
+<pre><code>## current location:  51.00, 6.00</code></pre>
+<pre class="sourceCode python"><code class="sourceCode python">geo_dis <span class="op">=</span> GeoDistance()
+addr <span class="op">=</span> geo_dis.get_location(curr_loc)
+<span class="bu">print</span>(<span class="st">&#39;current address: &#39;</span>, addr)</code></pre>
+<pre><code>## current address:  Lindenhof, Hohenbusch, Gangelt, Kreis Heinsberg, Regierungsbezirk Köln, Nordrhein-Westfalen, 52538, Deutschland</code></pre>
 <ul>
-<li>Draw car driving direction (demo)</li>
+<li>Calculate distance to parking lot</li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="st">&quot;img/car_direction.png&quot;</span>)</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:direction"></span>
-<img src="img/car_direction.png" alt="google map with car driving direction" width="1216" />
-<p class="caption">
-Figure 5.2: google map with car driving direction
-</p>
-</div>
+<pre class="sourceCode python"><code class="sourceCode python">pd.options.mode.chained_assignment <span class="op">=</span> <span class="va">None</span>
+df_dis <span class="op">=</span> df[[<span class="st">&#39;location_name&#39;</span>, <span class="st">&#39;latitude&#39;</span>, <span class="st">&#39;longitude&#39;</span>]]
+origin <span class="op">=</span> ego_car.get_location()
+destination <span class="op">=</span> <span class="bu">zip</span>(df_dis[<span class="st">&#39;latitude&#39;</span>].values, df_dis[<span class="st">&#39;longitude&#39;</span>].values)
+df_dis[<span class="st">&#39;distance/km&#39;</span>] <span class="op">=</span> [geo_dis.calc_geo_distance(origin, des) <span class="cf">for</span> des <span class="kw">in</span> destination]
+df_dis.sort_values(<span class="st">&#39;distance/km&#39;</span>, ascending<span class="op">=</span><span class="va">True</span>)</code></pre>
+<pre><code>##   location_name   latitude  longitude  distance/km
+## 0          e.Go  50.781624   6.046581    24.513606
+## 1       Super C  50.778430   6.078702    25.263182
+## 2        Bushof  50.777557   6.090270    25.548138
+## 3  Hauptbahnhof  50.767911   6.091582    26.611184
+## 4    Euregiozoo  50.763672   6.115565    27.519752</code></pre>
+<ul>
+<li>Smart choice (toy example, with different weight on attributes)
+<ul>
+<li>distance: 0.5</li>
+<li>price: 0.2</li>
+<li>is_outdoor: 0.1</li>
+<li>egoPay: 0.2</li>
+</ul></li>
+</ul>
+<pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> MinMaxScaler
+scaler <span class="op">=</span> MinMaxScaler()
+
+df_new <span class="op">=</span> df[[<span class="st">&#39;price/hour&#39;</span>, <span class="st">&#39;is_outdoor&#39;</span>, <span class="st">&#39;ego_pay&#39;</span>]]
+df_new[<span class="st">&#39;is_outdoor&#39;</span>] <span class="op">=</span> df_new[<span class="st">&#39;is_outdoor&#39;</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x : x <span class="op">^</span> <span class="dv">1</span>)
+df_new[<span class="st">&#39;ego_pay&#39;</span>] <span class="op">=</span> df_new[<span class="st">&#39;ego_pay&#39;</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x : x <span class="op">^</span> <span class="dv">1</span>)
+df_weight <span class="op">=</span> df_new.join(df_dis[<span class="st">&#39;distance/km&#39;</span>], how<span class="op">=</span><span class="st">&#39;inner&#39;</span>)
+<span class="co"># max-min scaler</span>
+norm_values <span class="op">=</span> scaler.fit_transform(df_weight.values)
+norm_values</code></pre>
+<pre><code>## array([[0.        , 0.        , 0.        , 0.        ],
+##        [0.5       , 0.        , 1.        , 0.24934802],
+##        [1.        , 0.        , 1.        , 0.34413907],
+##        [1.        , 1.        , 0.        , 0.69776329],
+##        [0.5       , 0.        , 0.        , 1.        ]])</code></pre>
+<ul>
+<li>the smaller value, the better choice</li>
+</ul>
+<pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> numpy <span class="im">as</span> np
+cost <span class="op">=</span> np.<span class="bu">sum</span>(norm_values <span class="op">*</span> [<span class="fl">0.2</span>, <span class="fl">0.1</span>, <span class="fl">0.2</span>, <span class="fl">0.5</span>], axis<span class="op">=</span><span class="dv">1</span>)
+df_weight[<span class="st">&#39;cost&#39;</span>] <span class="op">=</span> cost.T
+df_weight.sort_values(<span class="st">&#39;cost&#39;</span>, ascending<span class="op">=</span><span class="va">True</span>)</code></pre>
+<pre><code>##    price/hour  is_outdoor  ego_pay  distance/km      cost
+## 0           2           0        0    24.513606  0.000000
+## 1           3           0        1    25.263182  0.424674
+## 2           4           0        1    25.548138  0.572070
+## 4           3           0        0    27.519752  0.600000
+## 3           4           1        0    26.611184  0.648882</code></pre>
+<p>It seems the best choice is <strong>Euregiozoo</strong></p>
+<ul>
+<li>video demo for parking</li>
+</ul>
+<p><img src="img/Videoscene1.gif" /></p>
 
 </div>
             </section>
@@ -215,8 +265,8 @@ Figure 5.2: google map with car driving direction
           </div>
         </div>
       </div>
-<a href="e-go-park.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="driving-animation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="dataset-overview.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="google-map-visulization.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

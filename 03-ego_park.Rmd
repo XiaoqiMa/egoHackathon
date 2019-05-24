@@ -1,4 +1,4 @@
-# e.GP Park
+# e.GO Park
 
 Intelligent, we mean that we should use *smart algorithms* to choose the most appropriate parking lot, considering the distance, price and etc. 
 

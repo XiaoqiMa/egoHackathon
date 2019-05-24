@@ -1,6 +1,6 @@
 --- 
 title: "e.GO Digital Hackathon"
-author: "Team: Hugs for bugs"
+author: "Team: Hugs for bugs (Xiaoqi, Yafei, Sachin, Venkatesh)"
 date: "`r Sys.Date()`"
 output:
   html_document:
@@ -23,7 +23,7 @@ Parking is understudied, yet imposes a similarly significant burden on drivers a
 - Unsurprisingly, the largest cities and major financial centers suffer the most with drivers in New York (107 hours), London (67 hours) and Frankfurt (65 hours) spending the most time searching for parking each year.
 -  Paying for more parking time than required (“overpaying”) is a universal parking pain with drivers in the U.S., U.K. and Germany (costing $20.4 billion, £6.7 billion and €4.4 billion a year respectively).
 
-**We need intelligent parking solutions -- e.GO Park**
+**We need intelligent parking solutions -- e.GO Park & Pay**
 
 ```{r, egoPark, fig.align='center', fig.cap="e.GO Park logo" }
 knitr::include_graphics("img/egoPark.png")

@@ -36,3 +36,7 @@ knitr::include_graphics("img/google_marker.png")
 ```{r, direction, fig.align='center', fig.cap="google map with car driving direction" }
 knitr::include_graphics("img/car_direction.png")
 ```
+
+
+
+

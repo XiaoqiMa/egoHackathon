@@ -77,12 +77,12 @@ df_weight.sort_values('cost', ascending=True)
 ```
 It seems the best choice is **Euregiozoo**
 
+- video demo for parking
 
-
-
-
-
-
+```{r}
+library(vembedr)
+embed_url("https://www.youtube.com/watch?v=lPfmxcEOriQ&feature=youtu.be")
+```
 
 
 

@@ -1,2 +1,0 @@
-# egoHackathon
-e.Go Hackathon

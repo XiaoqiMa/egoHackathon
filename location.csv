@@ -1,0 +1,6 @@
+	location_name	latitude	longitude	price/hour	is_outdoor	ego_pay
+0	e.Go	50.7816239	6.0465812	2	1	1
+1	Super C	50.7784305	6.0787017	3	1	0
+2	Bushof	50.7775570	6.0902704	4	1	0
+3	Hauptbahnhof	50.7679112	6.0915823	4	0	1
+4	Euregiozoo	50.7636721	6.1155646	3	1	1

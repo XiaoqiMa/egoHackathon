@@ -1,0 +1,19 @@
+--- 
+title: "e.GO Digital Hackathon"
+author: "Team: Hugs for bugs"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    df_print: paged
+description: This is a website demo for hachathon The output format for this example
+  is bookdown::gitbook.
+documentclass: book
+link-citations: yes
+site: bookdown::bookdown_site
+
+---
+
+# Task
+
+The e.GO life is generating, collecting and processing serveral data per second. Those data could be very valuable for us. Especially when you think of developing new innovative business models. Your task is to develop value-adding services for the e.GO Life and its user considering the provided data.
+

@@ -1,0 +1,55 @@
+# Dataset Overview
+
+
+## We prepare a dataset, as shown below
+
+```{python}
+import pandas as pd
+df = pd.read_csv('location.csv', sep='\t', index_col=0)
+df
+```
+- location_name: the parking plot location
+- latitude: latitude of the parking plot
+- longtitude: longtitude of the parking plot
+- price/hour: price to be charged per hour
+- is_outdoor: is the parking plot outdoor or inside 
+- ego_pay: does the parking plot support "EgoPay"
+
+## Get current location, update location
+```{python}
+import requests
+class EgoCar:
+    
+    def __init__(self, api_url):
+        self.api_url = api_url
+        self.api_key = '7443363c-4304-4c56-9df0-6af4af40c613'
+        self.header = {'Content-type': 'application/json', 'X-Api-Key': self.api_key}
+        
+    def get_location(self):
+        res = requests.get(self.api_url, headers=self.header)
+        location = res.json()['location']
+        return location
+    
+    def update_location(self, new_location):
+        x, y = new_location.split(',')
+        x, y = float(x), float(y)
+        if x >= -90 and x <= 90 and y >= -90 and y <= 90:
+            data = {'location': new_location}
+            requests.patch(self.api_url, json=data, headers=self.header)
+            print('new location: ', new_location)
+        else:
+            print('[Error] Latitude value must be between -90 and 90')
+```
+
+- get current location
+```{python}
+api_url = 'https://ego-vehicle-api.azurewebsites.net/api/v1/vehicle/signals'
+ego_car = EgoCar(api_url)
+print('current location: ', ego_car.get_location())
+```
+- update location
+
+```{python}
+ego_car.update_location('50.00, 6.00')
+```
+

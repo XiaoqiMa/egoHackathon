@@ -1,0 +1,88 @@
+# Intelligent choose parking lot
+
+Intelligent, we mean that we should use smart algorithms to choose the most appropriate parking lot, considering the distance, price and etc. 
+
+- Calculate Geographical distance
+```{python}
+from geopy.distance import geodesic
+class GeoDistance:
+    
+    def __init__(self):
+        self.geolocator = Nominatim(user_agent="demo")
+        
+    def get_geo_position(self, location):
+        addr = self.geolocator.geocode(location)
+        return (addr.latitude, addr.longitude)
+    
+    def get_location(self, geo_position):
+        location = self.geolocator.reverse(geo_position)
+        try:
+            addr = location.raw['address']
+            return '{road}, {city_district}, {city}, {postcode}'.format(**addr)
+        except:
+            return location.address
+            
+    def calc_geo_distance(self, origin, destination):
+        distance = geodesic(origin, destination).km
+        return distance
+        
+```
+
+- First get the current location
+```{python}
+api_url = 'https://ego-vehicle-api.azurewebsites.net/api/v1/vehicle/signals'
+ego_car = EgoCar(api_url)
+curr_loc = ego_car.get_location()
+print('current location: ', curr_loc)
+
+geo_dis = GeoDistance()
+addr = geo_dis.get_location(curr_loc)
+print('current address: ', addr)
+```
+- Calculate distance to parking lot
+```{python}
+pd.options.mode.chained_assignment = None
+df_dis = df[['location_name', 'latitude', 'longitude']]
+origin = ego_car.get_location()
+destination = zip(df_dis['latitude'].values, df_dis['longitude'].values)
+df_dis['distance/km'] = [geo_dis.calc_geo_distance(origin, des) for des in destination]
+df_dis.sort_values('distance/km', ascending=True)
+```
+- Smart choice (toy example, with different weight on attributes)
+  - distance: 0.5
+  - price: 0.2
+  - is_outdoor: 0.1
+  - egoPay: 0.2
+  
+```{python}
+from sklearn.preprocessing import MinMaxScaler
+scaler = MinMaxScaler()
+
+df_new = df[['price/hour', 'is_outdoor', 'ego_pay']]
+df_new['is_outdoor'] = df_new['is_outdoor'].apply(lambda x : x ^ 1)
+df_new['ego_pay'] = df_new['ego_pay'].apply(lambda x : x ^ 1)
+df_weight = df_new.join(df_dis['distance/km'], how='inner')
+# max-min scaler
+norm_values = scaler.fit_transform(df_weight.values)
+norm_values
+```
+- the smaller value, the better choice
+
+```{python}
+import numpy as np
+cost = np.sum(norm_values * [0.2, 0.1, 0.2, 0.5], axis=1)
+df_weight['cost'] = cost.T
+df_weight.sort_values('cost', ascending=True)
+```
+It seems the best choice is **Euregiozoo**
+
+
+
+
+
+
+
+
+
+
+

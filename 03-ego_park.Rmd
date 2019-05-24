@@ -6,6 +6,7 @@ Intelligent, we mean that we should use *smart algorithms* to choose the most ap
 ```{python}
 from geopy.distance import geodesic
 from geopy.geocoders import Nominatim
+
 class GeoDistance:
     
     def __init__(self):

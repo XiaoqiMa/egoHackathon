@@ -6,7 +6,7 @@ Our services should support at least the following functions:
 - Intelligently choose the parking lot
   - location convenient
   - cheap price
-  - support egoPay
+  - support egoPay \@ref(fig:egoPay)
 - Shortly reservation for the parking lot
   - estimating the arrival time
   - automatically reserve the parking space in advance
@@ -14,7 +14,16 @@ Our services should support at least the following functions:
 - Immediately payment -- egoPay
   - no worry about parking time
   - automatic charging fees while leaving
-- Ego drive-thru
+- Ego drive-thru 
   - food reservation from supermarket
-  - food pick up from parking lot
-  - food payment by egoPay
+  - food pick up from parking lotw
+  - food payment by egoPay 
+  
+  
+```{r, egoPay, fig.align='center', fig.cap="e.GO Pay logo" }
+knitr::include_graphics("img/egoPay.png")
+```
+
+![](https://media.giphy.com/media/3oEduOtKREwfTH73Q4/giphy.gif)
+
+

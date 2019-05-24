@@ -1,5 +1,6 @@
 # Driving animation
-- Dynamic animation from one point to another point
+
+- Dynamic animation from origin to destination
 ```{r showChoro1}
 htmltools::includeHTML("animation.html")
 

@@ -1,6 +1,6 @@
 # Intelligent choose parking lot
 
-Intelligent, we mean that we should use smart algorithms to choose the most appropriate parking lot, considering the distance, price and etc. 
+Intelligent, we mean that we should use *smart algorithms* to choose the most appropriate parking lot, considering the distance, price and etc. 
 
 - Calculate Geographical distance
 ```{python}
@@ -40,6 +40,7 @@ geo_dis = GeoDistance()
 addr = geo_dis.get_location(curr_loc)
 print('current address: ', addr)
 ```
+
 - Calculate distance to parking lot
 ```{python}
 pd.options.mode.chained_assignment = None

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Section 5 Google Map Visulization | e.GO Digital Hackathon</title>
+  <title>Section 7 e.GO Pay – Make life easier | e.GO Digital Hackathon</title>
   <meta name="description" content="This is a website demo for hachathon The output format for this example is bookdown::gitbook." />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Section 5 Google Map Visulization | e.GO Digital Hackathon" />
+  <meta property="og:title" content="Section 7 e.GO Pay – Make life easier | e.GO Digital Hackathon" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Section 5 Google Map Visulization | e.GO Digital Hackathon" />
+  <meta name="twitter:title" content="Section 7 e.GO Pay – Make life easier | e.GO Digital Hackathon" />
   
   <meta name="twitter:description" content="This is a website demo for hachathon The output format for this example is bookdown::gitbook." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="intelligent-choose-parking-lot.html">
-<link rel="next" href="driving-animation.html">
+<link rel="prev" href="driving-animation.html">
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -159,64 +159,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="google-map-visulization" class="section level1">
-<h1><span class="header-section-number">Section 5</span> Google Map Visulization</h1>
-<p>We could actually use Google Map API to get access to the location, update the location, track the location and guide the direction.</p>
-<ul>
-<li>Code to add marker and direction</li>
-</ul>
-<pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> GeoMaps:
-    
-    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, curr_location):
-        <span class="va">self</span>.key <span class="op">=</span> <span class="st">&#39;GoogleAPIKey&#39;</span>
-        gmaps.configure(api_key<span class="op">=</span><span class="va">self</span>.key)
-        <span class="va">self</span>.curr_location <span class="op">=</span> curr_location
-        <span class="va">self</span>.fig <span class="op">=</span> gmaps.figure(center<span class="op">=</span><span class="va">self</span>.curr_location, zoom_level<span class="op">=</span><span class="dv">12</span>)
-        
-    <span class="kw">def</span> add_marker(<span class="va">self</span>, marker_pos):
-        markers <span class="op">=</span> gmaps.marker_layer(marker_pos)
-        <span class="va">self</span>.fig.add_layer(markers)
-        <span class="cf">return</span> <span class="va">self</span>.fig
-    
-    <span class="kw">def</span> add_direction(<span class="va">self</span>, origin, destination):
-        to_destination <span class="op">=</span> gmaps.directions_layer(origin, destination)
-        <span class="va">self</span>.fig.add_layer(to_destination)
-        <span class="cf">return</span> <span class="va">self</span>.fig
-    
-    <span class="kw">def</span> get_curr_location(<span class="va">self</span>):
-        <span class="cf">return</span> <span class="va">self</span>.curr_location
-    
-    <span class="kw">def</span> update_location(<span class="va">self</span>, new_location):
-        <span class="va">self</span>.curr_location <span class="op">=</span> new_location</code></pre>
-<ul>
-<li>Mark current location</li>
-</ul>
-<pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="st">&quot;img/google_marker.png&quot;</span>)</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:marker"></span>
-<img src="img/google_marker.png" alt="google map with marker" width="1070" />
-<p class="caption">
-Figure 5.1: google map with marker
-</p>
-</div>
-<ul>
-<li>Draw car driving direction (demo)</li>
-</ul>
-<pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="st">&quot;img/car_direction.png&quot;</span>)</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:direction"></span>
-<img src="img/car_direction.png" alt="google map with car driving direction" width="1216" />
-<p class="caption">
-Figure 5.2: google map with car driving direction
-</p>
-</div>
+<div id="e.go-pay-make-life-easier" class="section level1">
+<h1><span class="header-section-number">Section 7</span> e.GO Pay – Make life easier</h1>
+<p>The trend towards use of non-cash transactions and settlement began in daily life during the 1990s, when electronic banking became common. By the 2010s digital payment methods were widespread in many countries, with examples including intermediaries such as PayPal, digital wallet systems operated by companies like Apple, contactless and NFC payments by electronic card or smartphone, and electronic bills and banking, all in widespread use.</p>
+<p><strong>e.GO Pay</strong> YOUR BEST CHOICE</p>
+<p><img src="https://media.giphy.com/media/eWPxcuWQz8Wha/giphy.gif" /></p>
 
+<div id="refs" class="references">
+<div>
+<p>Cookson, Graham, and Bob Pishue. 2017. “The Impact of Parking Pain in the Us, Uk and Germany.” <em>Hg. V. INRIX Research. Online Verfügbar Unter Http://Inrix. Com/Research/Parking-Pain/, Zuletzt Geprüft Am</em> 21: 2018.</p>
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="intelligent-choose-parking-lot.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="driving-animation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="driving-animation.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

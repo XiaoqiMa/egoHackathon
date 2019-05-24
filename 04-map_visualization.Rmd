@@ -1,5 +1,7 @@
 # Google Map Visulization
 
+We could actually use Google Map API to get access to the location, update the location, track the location and guide the direction.
+
 - Code to add marker and direction
 ```{python}
 class GeoMaps:
@@ -31,7 +33,7 @@ class GeoMaps:
 ```{r, marker, fig.align='center', fig.cap="google map with marker" }
 knitr::include_graphics("img/google_marker.png")
 ```
-- Draw car driving direction
+- Draw car driving direction (demo)
 
 ```{r, direction, fig.align='center', fig.cap="google map with car driving direction" }
 knitr::include_graphics("img/car_direction.png")

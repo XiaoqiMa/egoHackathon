@@ -1,5 +1,6 @@
 # Dataset Overview
 
+Before conducting data processing, have a look at the synthetic dataset.
 
 ## We prepare a dataset, as shown below
 
@@ -15,7 +16,7 @@ df
 - is_outdoor: is the parking plot outdoor or inside 
 - ego_pay: does the parking plot support "EgoPay"
 
-## Get current location, update location
+## Get current location, update location through API
 ```{python}
 import requests
 class EgoCar:
@@ -50,6 +51,6 @@ print('current location: ', ego_car.get_location())
 - update location
 
 ```{python}
-ego_car.update_location('50.00, 6.00')
+ego_car.update_location('51.00, 6.00')
 ```
 

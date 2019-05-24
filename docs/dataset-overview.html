@@ -129,15 +129,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">e.GO Digital Hackathon</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Task</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Background</a></li>
 <li class="chapter" data-level="2" data-path="value-adding-services.html"><a href="value-adding-services.html"><i class="fa fa-check"></i><b>2</b> Value-adding services</a></li>
 <li class="chapter" data-level="3" data-path="dataset-overview.html"><a href="dataset-overview.html"><i class="fa fa-check"></i><b>3</b> Dataset Overview</a><ul>
 <li class="chapter" data-level="3.1" data-path="dataset-overview.html"><a href="dataset-overview.html#we-prepare-a-dataset-as-shown-below"><i class="fa fa-check"></i><b>3.1</b> We prepare a dataset, as shown below</a></li>
-<li class="chapter" data-level="3.2" data-path="dataset-overview.html"><a href="dataset-overview.html#get-current-location-update-location"><i class="fa fa-check"></i><b>3.2</b> Get current location, update location</a></li>
+<li class="chapter" data-level="3.2" data-path="dataset-overview.html"><a href="dataset-overview.html#get-current-location-update-location-through-api"><i class="fa fa-check"></i><b>3.2</b> Get current location, update location through API</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="intelligent-choose-parking-lot.html"><a href="intelligent-choose-parking-lot.html"><i class="fa fa-check"></i><b>4</b> Intelligent choose parking lot</a></li>
 <li class="chapter" data-level="5" data-path="google-map-visulization.html"><a href="google-map-visulization.html"><i class="fa fa-check"></i><b>5</b> Google Map Visulization</a></li>
 <li class="chapter" data-level="6" data-path="driving-animation.html"><a href="driving-animation.html"><i class="fa fa-check"></i><b>6</b> Driving animation</a></li>
+<li class="chapter" data-level="7" data-path="e-go-pay-make-life-easier.html"><a href="e-go-pay-make-life-easier.html"><i class="fa fa-check"></i><b>7</b> e.GO Pay – Make life easier</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -160,6 +161,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="dataset-overview" class="section level1">
 <h1><span class="header-section-number">Section 3</span> Dataset Overview</h1>
+<p>Before conducting data processing, have a look at the synthetic dataset.</p>
 <div id="we-prepare-a-dataset-as-shown-below" class="section level2">
 <h2><span class="header-section-number">3.1</span> We prepare a dataset, as shown below</h2>
 <pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> pandas <span class="im">as</span> pd
@@ -180,8 +182,8 @@ df</code></pre>
 <li>ego_pay: does the parking plot support “EgoPay”</li>
 </ul>
 </div>
-<div id="get-current-location-update-location" class="section level2">
-<h2><span class="header-section-number">3.2</span> Get current location, update location</h2>
+<div id="get-current-location-update-location-through-api" class="section level2">
+<h2><span class="header-section-number">3.2</span> Get current location, update location through API</h2>
 <pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> requests
 <span class="kw">class</span> EgoCar:
     
@@ -210,12 +212,12 @@ df</code></pre>
 <pre class="sourceCode python"><code class="sourceCode python">api_url <span class="op">=</span> <span class="st">&#39;https://ego-vehicle-api.azurewebsites.net/api/v1/vehicle/signals&#39;</span>
 ego_car <span class="op">=</span> EgoCar(api_url)
 <span class="bu">print</span>(<span class="st">&#39;current location: &#39;</span>, ego_car.get_location())</code></pre>
-<pre><code>## current location:  50.00, 6.00</code></pre>
+<pre><code>## current location:  51.00, 6.00</code></pre>
 <ul>
 <li>update location</li>
 </ul>
-<pre class="sourceCode python"><code class="sourceCode python">ego_car.update_location(<span class="st">&#39;50.00, 6.00&#39;</span>)</code></pre>
-<pre><code>## new location:  50.00, 6.00</code></pre>
+<pre class="sourceCode python"><code class="sourceCode python">ego_car.update_location(<span class="st">&#39;51.00, 6.00&#39;</span>)</code></pre>
+<pre><code>## new location:  51.00, 6.00</code></pre>
 
 </div>
 </div>
